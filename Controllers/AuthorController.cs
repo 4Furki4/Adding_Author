@@ -1,5 +1,6 @@
 using AutoMapper;
 using BookStore.Applications.AuthorOperations.Command.CreateAuthor;
+using BookStore.Applications.AuthorOperations.Command.DeleteAuthor;
 using BookStore.Applications.AuthorOperations.Command.UpdateAuthor;
 using BookStore.Applications.AuthorOperations.Querries.GetAuthorDetails;
 using BookStore.Applications.AuthorOperations.Querries.GetAuthors;
@@ -57,6 +58,16 @@ namespace BookStore.Controllers
             command.AuthorId=id;
             command.Model=updatedAuthor;
             validations.ValidateAndThrow(command);
+            command.Handler();
+            return Ok();
+        }
+        [HttpDelete("id")]
+        public IActionResult DeleteAuthor(int id)
+        {
+            DeleteAuthorCommand command = new(_context);
+            DeleteAuthorCommandValidator validation= new();
+            command.AuthorId=id;
+            validation.ValidateAndThrow(command);
             command.Handler();
             return Ok();
         }
