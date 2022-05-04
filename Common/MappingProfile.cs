@@ -1,5 +1,6 @@
 using AutoMapper;
 using BookStore.Applications.AuthorOperations.Command.CreateAuthor;
+using BookStore.Applications.AuthorOperations.Command.UpdateAuthor;
 using BookStore.Applications.AuthorOperations.Querries.GetAuthorDetails;
 using BookStore.Applications.AuthorOperations.Querries.GetAuthors;
 using BookStore.Applications.BookOperations.Commands.CreateBook;

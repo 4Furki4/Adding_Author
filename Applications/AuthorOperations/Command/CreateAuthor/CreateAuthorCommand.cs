@@ -11,7 +11,7 @@ namespace BookStore.Applications.AuthorOperations.Command.CreateAuthor
         private readonly BookStoreDbContext _context;
         private readonly IMapper _mapper;
         public CreateAuthorModel Model { get; set; }
-        public int AuthorId { get; set; }
+
         public CreateAuthorCommand(BookStoreDbContext context, IMapper mapper)
         {
             _context = context;
@@ -19,7 +19,7 @@ namespace BookStore.Applications.AuthorOperations.Command.CreateAuthor
         }
         public void Handler()
         {
-            var author = _context.Authors.SingleOrDefault(x=>x.Name==Model.Name);
+            var author = _context.Authors.SingleOrDefault(x=>x.Name==Model.Name && x.Surname==Model.Surname);
             if(author is not null)
                 throw new InvalidOperationException("Yazar zaten mevcut.");
             author = _mapper.Map<Author>(Model);
