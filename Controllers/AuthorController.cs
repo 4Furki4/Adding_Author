@@ -1,4 +1,5 @@
 using AutoMapper;
+using BookStore.Applications.AuthorOperations.Command.CreateAuthor;
 using BookStore.Applications.AuthorOperations.Querries.GetAuthorDetails;
 using BookStore.Applications.AuthorOperations.Querries.GetAuthors;
 using BookStore.DbOperations;
@@ -36,6 +37,17 @@ namespace BookStore.Controllers
             var result = detail.Handler();
             validations.ValidateAndThrow(detail);
             return Ok(result);
+        }
+        [HttpPost("id")]
+        public IActionResult CreateAuthor([FromBody] CreateAuthorModel newAuthor, int id)
+        {
+            CreateAuthorCommand command = new(_context,_mapper);
+            command.AuthorId=id;
+            command.Model=newAuthor;
+            CreateAuthorCommandValidation validations = new();
+            command.Handler();
+            validations.ValidateAndThrow(command);
+            return Ok();
         }
 
     }

@@ -1,4 +1,5 @@
 using AutoMapper;
+using BookStore.Applications.AuthorOperations.Command.CreateAuthor;
 using BookStore.Applications.AuthorOperations.Querries.GetAuthorDetails;
 using BookStore.Applications.AuthorOperations.Querries.GetAuthors;
 using BookStore.Applications.BookOperations.Commands.CreateBook;
@@ -18,11 +19,11 @@ namespace BookStore.Common
             CreateMap<Book, BookDetailViewModel>().ForMember(dest=> dest.Genre, opt=> opt.MapFrom(src=> src.Genre.Name)); //For HTTP GetById
                                                             //Destination Genre'ya git ve opt.MapFrom'daki gibi maple demek.
             CreateMap<Book, BooksViewModel>().ForMember(dest=> dest.Genre, opt=> opt.MapFrom(src=> src.Genre.Name)); //For HTTP Get
-
             CreateMap<Genre,GenresViewModel>();
             CreateMap<Genre,GenreDetailViewModel>();
             CreateMap<Author,GetAuthorsModel>();
             CreateMap<Author, GetAuthorDetailViewModel>();
+            CreateMap<CreateAuthorModel, Author>();
         }
     }
 }
