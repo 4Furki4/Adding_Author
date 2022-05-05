@@ -19,19 +19,8 @@ namespace BookStore.Applications.BookOperations.Queries.GetBooks
         }
         public List<BooksViewModel> Handler()
         {
-            var bookList = _dbContext.Books.Include(x=>x.Genre).OrderBy(x=>x.Id).ToList<Book>();
-            List<BooksViewModel> vm = mapper.Map<List<BooksViewModel>>(bookList); //new List<BooksViewModel>();
-            // foreach (var book in bookList)
-            // {
-            //     vm.Add(new BooksViewModel() //View Modelde hangi verilerin ne biçimde döndürüleceği belirlendi ve buna uygun bir biçimde Book nesnesi değil, 
-            //     {                           //modele uygun BooksViewModel nesnesi listemize eklendi
-            //         Title= book.Title,
-            //         Genre= ((GenreEnum)book.GenreId).ToString(),
-            //         PublishDate=book.PublishDate.Date.ToString("dd/MM/yyyy"),
-            //         PageCount=book.PageCount
-            //     });
-            // }
-            // return bookList; istediğimiz veri tipinin her zaman UI'a döndüğünden emin olmak için viewModel oluşturacağız ve geri dönüş tipi düzenlenmiş BookViewModel listesi olacak
+            var bookList = _dbContext.Books.Include(x=>x.Genre).Include(x=>x.Author).OrderBy(x=>x.Id).ToList<Book>();
+            List<BooksViewModel> vm = mapper.Map<List<BooksViewModel>>(bookList);
             return vm;
         }
     }
@@ -42,5 +31,6 @@ namespace BookStore.Applications.BookOperations.Queries.GetBooks
         public int PageCount { get; set; }
         public string PublishDate { get; set; }
         public string Genre  {get; set;}
+        public Author Author {get; set;}
     }
 }

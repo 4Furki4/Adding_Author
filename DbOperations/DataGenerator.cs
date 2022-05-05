@@ -55,21 +55,27 @@ namespace BookStore.DbOperations
                 );
                 context.Books.AddRange
                 (
-                    new Book{
-                    Title="Lord Of The Rings",
-                    GenreId=1,
-                    PageCount=800,
-                    PublishDate= new DateTime(2001,11,07)
+                    new Book
+                    {
+                        Title="Lord Of The Rings",
+                        GenreId=1,
+                        AuthorId=1,
+                        PageCount=800,
+                        PublishDate= new DateTime(2001,11,07)
                     },
-                    new Book{
+                    new Book
+                    {
                         Title="Incognito",
                         GenreId=2,
                         PageCount=300,
-                        PublishDate= new DateTime(2016,6,11)
+                        PublishDate= new DateTime(2016,6,11),
+                        AuthorId=2
                     },
-                    new Book{
+                    new Book
+                    {
                         Title="Our Inner Ape",
                         GenreId=2,
+                        AuthorId=3,
                         PageCount=400,
                         PublishDate= new DateTime(2017,1,18)
                     }

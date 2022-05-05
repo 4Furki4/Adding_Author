@@ -3,6 +3,7 @@ using System.Linq;
 using AutoMapper;
 using BookStore.Common;
 using BookStore.DbOperations;
+using BookStore.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace BookStore.Applications.BookOperations.Queries.GetBookDetail
@@ -20,12 +21,11 @@ namespace BookStore.Applications.BookOperations.Queries.GetBookDetail
         }
         public BookDetailViewModel Handler()
         {
-            var book = _dbContext.Books.Include(x=>x.Genre).Where(x=>x.Id==BookId).SingleOrDefault();
+            var book = _dbContext.Books.Include(x=>x.Genre).Include(x=>x.Author).Where(x=>x.Id==BookId).SingleOrDefault();
             if (book is null)
                 throw new InvalidOperationException("Kitap bulunamadı");
             BookDetailViewModel vm = mapper.Map<BookDetailViewModel>(book);
             return vm;
-
         }
 
     }
@@ -35,5 +35,6 @@ namespace BookStore.Applications.BookOperations.Queries.GetBookDetail
         public int PageCount { get; set; }
         public string Genre { get; set; }
         public string PublishDate { get; set; }
+        public Author Author { get; set; }
     }
 }
