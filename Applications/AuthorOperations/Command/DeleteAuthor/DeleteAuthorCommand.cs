@@ -18,7 +18,7 @@ namespace BookStore.Applications.AuthorOperations.Command.DeleteAuthor
             var author = _context.Authors.SingleOrDefault(x=>x.Id==AuthorId);
             if(author is null)
                 throw new InvalidOperationException("Silmek istediğiniz kitap bulunamadı.");
-            if(_context.Books.SingleOrDefault(x=>x.Id==AuthorId) is not null)
+            if(_context.Books.SingleOrDefault(x=>x.Id==AuthorId) is not null) //Ödevdeki şart: Eğer silinmek istenen yazarın kitabı varsa önce kitap silinmeli.
                 throw new InvalidOperationException("Silmek istediğiniz yazarın kitabı var! Önce Kitabı silmelisiniz.");
             else
                 _context.Authors.Remove(author);

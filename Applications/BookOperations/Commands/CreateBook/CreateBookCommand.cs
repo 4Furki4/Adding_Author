@@ -28,7 +28,7 @@ namespace BookStore.Applications.BookOperations.Commands.CreateBook
             var author = _dbContext.Authors.SingleOrDefault(x=>x.Name==Model.Author.Name && x.Surname==Model.Author.Surname);
 
             book = mapper.Map<Book>(Model); //CreateBookModel tipinden Book tipine mapledik.
-            if(author is not null)
+            if(author is not null) // Aynı yazar mevcutsa yeni kitap oluşturmadan kitabın yazarını mezkur yazar olarak atıyoruz.
                 book.Author=author;
             _dbContext.Books.Add(book);
             _dbContext.SaveChanges();

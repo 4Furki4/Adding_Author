@@ -31,7 +31,7 @@ namespace BookStore.Applications.BookOperations.Commands.UpdateBook
     public class UpdateBookModel
     {
         public string Title { get; set; }
-        public int GenreId { get; set; }
+        public int GenreId { get; set; } //Yazar güncellemesini buradan yapmaktan ziyade kendi endpointleriyle yapmak iyi olur, Author eklemedim.
 
     }
 }
